@@ -27,7 +27,7 @@ workflow DOWNLOAD_DATABASES {
 
         amrfinder_plus_dir = file("$params.dbs/amrfinder/")
         antismash_dir = file("$params.dbs/antismash")
-        defense_finder_dir = file("$params.dbs/defense_finder/")
+        defense_finder_dir = file("$params.dbs/defense_finder_db/")
         dbcan_dir = file("$params.dbs/dbcan/")
         interproscan_dir = file("$params.dbs/interproscan")
         interpro_entry_list_dir = file("$params.dbs/interpro_entry_list/")
