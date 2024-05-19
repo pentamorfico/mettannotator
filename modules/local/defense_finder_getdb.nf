@@ -8,7 +8,7 @@ process DEFENSE_FINDER_GETDB {
     publishDir "$params.dbs", mode: 'copy'
 
     output:
-    tuple path("defense_finder_db/", type: "dir"), val("1.2.3"), emit: defense_finder_db
+    tuple path("defense_finder/", type: "dir"), val("1.2.3"), emit: defense_finder_db
 
     script:
     """

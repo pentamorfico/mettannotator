@@ -9,22 +9,22 @@ process DEFENSE_FINDER {
     tuple path(defense_finder_db), val(db_version)
 
     output:
-    tuple val(meta), path("defense_finder/${meta.prefix}_defense_finder_genes.tsv")  , emit: genes
-    tuple val(meta), path("defense_finder/${meta.prefix}_defense_finder_systems.tsv"), emit: systems
-    tuple val(meta), path("defense_finder/${meta.prefix}_defense_finder.gff")        , emit: gff
+    tuple val(meta), path("defense_finder_results/${meta.prefix}_defense_finder_genes.tsv")  , emit: genes
+    tuple val(meta), path("defense_finder_results/${meta.prefix}_defense_finder_systems.tsv"), emit: systems
+    tuple val(meta), path("defense_finder_results/${meta.prefix}_defense_finder.gff")        , emit: gff
     path "versions.yml"                                                              , emit: versions
 
     script:
     """
     defense-finder run \\
-        -o defense_finder \\
+        -o defense_finder_results \\
         --models-dir ${defense_finder_db} \\
         ${faa}
 
     process_defensefinder_result.py \\
-        -i defense_finder/ \\
+        -i defense_finder_results/ \\
         -p ${prokka_gff} \\
-        -o defense_finder/${meta.prefix}_defense_finder.gff -v 1.2.0
+        -o defense_finder_results/${meta.prefix}_defense_finder.gff -v 1.2.0
 
     cat <<-END_VERSIONS > versions.yml
     "${task.process}":
